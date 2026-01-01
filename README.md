@@ -1,92 +1,65 @@
-# QwertyCars - Premium Car Rental Platform 🚗✨
+# QwertyCars
 
-A modern, responsive, and feature-rich static web application for a luxury car rental service. Built with Vanilla HTML, CSS, and JavaScript, focusing on client-side logic and a premium user experience.
+A premium, static web application for luxury car rentals. Built with modern web technologies, QwertyCars offers a seamless user experience with advanced client-side functionality, persistent authentication, and a refined glassmorphism aesthetic.
 
-![Project Preview](assets/hero-bg.jpg)
-*(Note: Replace `assets/hero-bg.jpg` with a real screenshot of your app if desired)*
+![Banner](assets/hero-bg.jpg)
 
-## 🌟 Features
+## Features
 
-### 🔐 Advanced Authentication (Client-Side)
-- **Registration & Login**: Users can create accounts and log in securely (simulated via `localStorage`).
-- **Session Management**: Persistent login sessions.
-- **Strict Cart Permissions**: Users must be logged in to rent cars.
-- **Smart Validation**: Email duplicate checks and secure password handling (mock).
+### Authentication & Security
+*   **Client-Side Authentication**: Secure-feel login and registration system using LocalStorage.
+*   **Session Persistence**: Users remain logged in across page reloads.
+*   **Access Control**: Protected routes and actions (e.g., adding to cart) require active authentication.
+*   **Input Validation**: Duplicate email detection and credential verification.
 
-### 🛒 Dynamic Shopping Cart
-- **Real-time Calculations**: Automatically calculates rental duration (Days/Hours) and total cost.
-- **Gated Access**: Cart restricts actions for non-logged-in users.
-- **Auto-Cleanup**: Cart data is automatically cleared upon logout for privacy.
-- **Smart UI**: Hides complex details when the cart is empty for a cleaner look.
+### Core Functionality
+*   **Dynamic Cart System**: Real-time calculation of rental costs based on duration (days/hours).
+*   **Smart State Management**: Cart automatically clears upon logout to ensure privacy.
+*   **Interactive UI**: Elements respond dynamically to user state (e.g., empty cart illustrations, auth-gated buttons).
+*   **Feedback System**: Users can submit feedback which is stored locally and generated as a downloadable record.
 
-### 🌓 UI/UX & Theming
-- **Glassmorphism Design**: High-end, translucent aesthetic.
-- **Dark/Light Mode**: Fully toggleable theme with persistent preference storage.
-- **Toast Notifications**: Replaces intrusive browser alerts with smooth, animated custom toasts.
-- **Responsive Layout**: Works seamlessly on desktop and mobile.
+### User Interface
+*   **Responsive Design**: Fully responsive layout optimized for all device sizes.
+*   **Theme Engine**: Built-in dark mode with persistent user preference.
+*   **Visual Feedback**: Custom toast notification system replacing standard browser alerts.
 
-### 📝 Feedback & Admin System
-- **User Feedback**: Users can submit feedback and download a confirmation file.
-- **Company Records**: All feedback is silently stored in the background.
-- **Admin Export**: Hidden "Admin" functionality to export a master file of all submitted feedback.
+## Technology Stack
+*   **HTML5**
+*   **CSS3** (Variables, Flexbox, Grid, Animations)
+*   **JavaScript ES6+** (Modular architecture)
 
-## 🛠️ Technology Stack
-- **HTML5**: Semantic structure.
-- **CSS3**: Custom variables, keyframe animations, glassmorphism, responsive Grid/Flexbox.
-- **JavaScript (ES6+)**: Modular architecture (`auth.js`, `cart.js`, `theme.js`, etc.) with `localStorage` for state management.
+## Installation & Usage
 
-## 📂 Project Structure
+1.  **Clone the Repository**
+    ```bash
+    git clone https://github.com/your-username/car-rental-QwertyCars.git
+    ```
+
+2.  **Run the Application**
+    *   Navigate to the project directory.
+    *   Open `index.html` in any modern web browser.
+    *   *Recommendation*: Use VS Code's **Live Server** extension for the best experience.
+
+## Project Structure
+
 ```
 /
-├── index.html        # Landing page
-├── cars.html         # Fleet listing
-├── cart.html         # Shopping cart & checkout logic
-├── login.html        # Auth portal (Login/Register)
-├── feedback.html     # User feedback form
+├── assets/             # Images and static resources
 ├── css/
-│   └── style.css     # Global styles & themes
-└── js/
-    ├── main.js       # App entry point
-    ├── auth.js       # Authentication logic
-    ├── cart.js       # Cart & Rental logic
-    ├── theme.js      # Theme toggling
-    ├── utils.js      # Helpers (Toasts, etc.)
-    ├── data.js       # Car data (mock database)
-    └── constants.js  # Global configuration
+│   └── style.css       # Global stylesheet and theme definitions
+├── js/
+│   ├── auth.js         # Authentication logic (Login/Register/Session)
+│   ├── cart.js         # Shopping cart and rental calculation logic
+│   ├── main.js         # Application entry point and event initialization
+│   ├── theme.js        # Theme toggle logic
+│   ├── utils.js        # UI utilities and helper functions
+│   └── data.js         # Mock data for car fleet
+├── index.html          # Homepage
+├── cars.html           # Fleet listing page
+├── cart.html           # Shopping cart and checkout
+├── login.html          # Authentication page
+└── feedback.html       # Feedback submission form
 ```
 
-## 🚀 How to Run
-Since this is a static application, no backend server is required!
-
-1.  **Clone the repository**:
-    ```bash
-    git clone https://github.com/yourusername/car-rental-QwertyCars.git
-    ```
-2.  **Open in Browser**:
-    Simply double-click `index.html` to launch the application.
-3.  **For Best Experience**:
-    Use VS Code with the "Live Server" extension to handle local routing smoothly.
-
-## 🧪 How to Use
-
-### 1. Register a User
-- Go to `Login` > `Create Account`.
-- Sign up with your details.
-- You will be auto-redirected to Login.
-
-### 2. Rent a Car
-- Go to `Fleet` (`cars.html`).
-- Click "Add to Rental Cart".
-- Go to `Cart` (`cart.html`).
-- Select your Pick-up and Return dates.
-- Watch the price update automatically!
-
-### 3. Admin Features
-- Go to `Feedback` (`feedback.html`).
-- Scroll to the bottom to find the "Export Company Records" button.
-
-## 📄 License
-This project is open-source and available for educational purposes.
-
----
-*Built with ❤️ by [Your Name]*
+## License
+This project is licensed under the MIT License.
