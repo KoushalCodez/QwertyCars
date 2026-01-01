@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | QwertyCars</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">QWERTY<span style="font-weight: 300; color: #333;">CARS</span></a>
+            <div class="nav-links">
+                <button id="theme-toggle-btn" class="theme-toggle" aria-label="Toggle Theme">
+                    <!-- Icon injected by JS -->
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4" style="max-width: 600px;">
+        <h1 style="font-size: 2rem; margin-bottom: 2rem; text-align: center;">Secure Checkout</h1>
+
+        <div class="card-panel">
+            <form <form id="checkout-form">
+
+                <h2
+                    style="font-size: 1.25rem; margin-bottom: 1.5rem; border-bottom: 1px solid #eee; padding-bottom: 0.5rem;">
+                    Personal Details</h2>
+
+                <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" required class="input-field">
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" required class="input-field">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" required class="input-field">
+                </div>
+
+                <h2
+                    style="font-size: 1.25rem; margin: 2rem 0 1.5rem; border-bottom: 1px solid #eee; padding-bottom: 0.5rem;">
+                    Payment Information</h2>
+
+                <div class="form-group">
+                    <label>Card Number</label>
+                    <input type="text" placeholder="0000 0000 0000 0000" required class="input-field" pattern="\d{16}"
+                        title="16 digit card number">
+                </div>
+
+                <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label>Expiry Date</label>
+                        <input type="text" placeholder="MM/YY" required class="input-field"
+                            pattern="(0[1-9]|1[0-2])\/\d{2}" title="MM/YY format">
+                    </div>
+                    <div class="form-group">
+                        <label>CVV</label>
+                        <input type="text" placeholder="123" required class="input-field" pattern="\d{3,4}"
+                            title="3 or 4 digit CVV">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Confirm
+                    Payment</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/constants.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

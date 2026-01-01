@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | QwertyCars</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            /* Override body for login page to have full height hero-like background if needed */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--bg-body) 0%, var(--surface) 100%);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Abstract background shapes */
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            opacity: 0.6;
+        }
+
+        .shape-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary);
+            top: -100px;
+            left: -100px;
+        }
+
+        .shape-2 {
+            width: 300px;
+            height: 300px;
+            background: #FF4081;
+            /* Accent color */
+            bottom: -50px;
+            right: -50px;
+        }
+
+        .auth-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            z-index: 1;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        /* Dark mode overrides for card */
+        body.dark-mode .auth-card {
+            background: rgba(30, 30, 30, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .auth-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, var(--primary), #FF4081);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .auth-header p {
+            color: var(--text-muted);
+        }
+
+        .form-floating {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-floating input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 2.8rem;
+            /* Space for icon */
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            background: var(--bg-card);
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .form-floating input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+            outline: none;
+        }
+
+        .form-floating i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .btn-auth {
+            width: 100%;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-top: 1rem;
+            font-size: 1rem;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar (Simplified) -->
+    <nav class="navbar"
+        style="position: absolute; width: 100%; z-index: 10; background: transparent; box-shadow: none;">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">QWERTY<span style="font-weight: 300; color: var(--text);">CARS</span></a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <button id="theme-toggle-btn" class="theme-toggle" aria-label="Toggle Theme">
+                    <!-- Icon injected by JS -->
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="toast-container" style="position: fixed; top: 20px; right: 20px; z-index: 1000;"></div>
+
+    <div class="login-wrapper">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+
+        <div class="auth-card">
+            <!-- Login Form -->
+            <div id="login-section">
+                <div class="auth-header">
+                    <h1>Welcome Back</h1>
+                    <p>Sign in to access premium services</p>
+                </div>
+
+                <form id="login-form">
+                    <div class="form-floating">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                </path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </i>
+                        <input type="email" id="login-email" placeholder="Email Address" required>
+                    </div>
+
+                    <div class="form-floating">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                        </i>
+                        <input type="password" id="login-password" placeholder="Password" required>
+                    </div>
+
+                    <div style="text-align: right; margin-bottom: 1.5rem;">
+                        <a href="#" style="font-size: 0.85rem; color: var(--primary);">Forgot Password?</a>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-auth">Sign In</button>
+
+                    <div style="margin-top: 2rem; text-align: center; font-size: 0.9rem;">
+                        <span style="color: var(--text-muted);">Don't have an account?</span>
+                        <a href="#" class="auth-toggle-btn" onclick="toggleAuthMode()"
+                            style="color: var(--primary); font-weight: 600;">Create Account</a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Register Form (Hidden by default) -->
+            <div id="register-section" style="display: none;">
+                <div class="auth-header">
+                    <h1>Create Account</h1>
+                    <p>Join the future of mobility</p>
+                </div>
+
+                <form id="register-form">
+                    <div class="form-floating">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </i>
+                        <input type="text" id="reg-name" placeholder="Full Name" required>
+                    </div>
+
+                    <div class="form-floating">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                </path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </i>
+                        <input type="email" id="reg-email" placeholder="Email Address" required>
+                    </div>
+
+                    <div class="form-floating">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                        </i>
+                        <input type="password" id="reg-password" placeholder="Password" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-auth">Create Account</button>
+
+                    <div style="margin-top: 2rem; text-align: center; font-size: 0.9rem;">
+                        <span style="color: var(--text-muted);">Already have an account?</span>
+                        <a href="#" class="auth-toggle-btn" onclick="toggleAuthMode()"
+                            style="color: var(--primary); font-weight: 600;">Sign In</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/constants.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
