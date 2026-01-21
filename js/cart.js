@@ -145,20 +145,43 @@ window.calculateTotal = () => {
     renderCart(); // Re-render to update prices
 };
 
-// Initialize dates if needed (default to today + tomorrow)
+// Initialize dates with validation
 const initDates = () => {
     const pDate = document.getElementById('pickup-date');
     const rDate = document.getElementById('return-date');
-    if (pDate && !pDate.value) {
-        const today = new Date();
-        const tomorrow = new Date(today);
-        tomorrow.setDate(tomorrow.getDate() + 1);
 
-        pDate.valueAsDate = today;
-        rDate.valueAsDate = tomorrow;
+    if (pDate && rDate) {
+        // Set min date for pickup to today
+        const today = new Date().toISOString().split('T')[0];
+        pDate.setAttribute('min', today);
 
-        // Trigger calc
-        renderCart();
+        // Function to update return date constraints
+        const updateReturnConstraints = () => {
+            // Return date cannot be before pickup date
+            rDate.setAttribute('min', pDate.value);
+
+            // If return date is now invalid (less than pickup), reset it
+            if (rDate.value < pDate.value) {
+                rDate.value = pDate.value;
+            }
+            calculateTotal();
+        };
+
+        // Attach listener
+        pDate.addEventListener('change', updateReturnConstraints);
+
+        // Initial setup if empty
+        if (!pDate.value) {
+            const now = new Date();
+            const tomorrow = new Date(now);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+
+            pDate.valueAsDate = now;
+            rDate.valueAsDate = tomorrow;
+        }
+
+        // Apply constraints initially
+        updateReturnConstraints();
     }
 }
 
@@ -168,6 +191,13 @@ window.proceedToCheckout = (e) => {
     const cart = getCart();
     if (cart.length === 0) {
         alert("Your cart is empty! Please add a car to proceed.");
+        return;
+    }
+
+    // Validate Dates
+    const duration = getRentalDuration();
+    if (!duration.isValid) {
+        alert("Please select a valid return date (Return date must be after pickup date).");
         return;
     }
 
